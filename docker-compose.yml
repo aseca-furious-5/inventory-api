@@ -16,6 +16,8 @@ services:
       retries: 15
     volumes:
       - inventory-db-data:/var/lib/postgresql/data
+    env_file:
+      - .env.docker
 
   inventory:
     container_name: inventory
