@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { ItemService } from './item.service';
 import { AdjustmentInput, CreateItemInventoryInput } from './item.input';
 import { ItemInventory } from '@prisma/client';
+import * as Path from 'node:path';
 
 @Controller('item')
 export class ItemController {
@@ -23,7 +31,7 @@ export class ItemController {
   }
 
   @Get('adjustments/:itemId')
-  async getAdjustmentsByItemId(itemId: number) {
+  async getAdjustmentsByItemId(@Param('itemId', ParseIntPipe) itemId: number) {
     return this.itemService.getAdjustmentsByItemId(itemId);
   }
 }
