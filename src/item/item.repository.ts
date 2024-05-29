@@ -43,9 +43,9 @@ export class ItemRepository {
     });
   }
 
-  getAdjustmentsByItemId(itemId: number) {
+  getAdjustmentsByItemId(itemInventoryId: number) {
     return this.prismaService.adjustment.findMany({
-      where: { item: { itemId: itemId } },
+      where: { item: { id: itemInventoryId } },
     });
   }
 }

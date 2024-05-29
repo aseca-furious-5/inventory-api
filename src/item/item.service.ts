@@ -34,7 +34,7 @@ export class ItemService {
     return this.itemRepository.createItem(input);
   }
 
-  getAdjustmentsByItemId(itemId: number) {
-    return this.itemRepository.getAdjustmentsByItemId(itemId);
+  getAdjustmentsByItemId(itemInventoryId: number) {
+    return this.itemRepository.getAdjustmentsByItemId(itemInventoryId);
   }
 }

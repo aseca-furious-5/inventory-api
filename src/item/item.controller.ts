@@ -30,8 +30,10 @@ export class ItemController {
     return this.itemService.createItem(body);
   }
 
-  @Get('adjustments/:itemId')
-  async getAdjustmentsByItemId(@Param('itemId', ParseIntPipe) itemId: number) {
-    return this.itemService.getAdjustmentsByItemId(itemId);
+  @Get('adjustments/:id')
+  async getAdjustmentsByItemInventoryId(
+    @Param('id', ParseIntPipe) itemInventoryId: number,
+  ) {
+    return this.itemService.getAdjustmentsByItemId(itemInventoryId);
   }
 }
