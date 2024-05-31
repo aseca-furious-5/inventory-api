@@ -5,11 +5,12 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
+  Query,
 } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { AdjustmentInput, CreateItemInventoryInput } from './item.input';
 import { ItemInventory } from '@prisma/client';
-import * as Path from 'node:path';
 
 @Controller('item')
 export class ItemController {
@@ -35,5 +36,18 @@ export class ItemController {
     @Param('id', ParseIntPipe) itemInventoryId: number,
   ) {
     return this.itemService.getAdjustmentsByItemId(itemInventoryId);
+  }
+
+  @Get('has-enough-stock/:itemId')
+  async hasStock(
+    @Param('itemId', ParseIntPipe) itemId: number,
+    @Query('quantity', ParseIntPipe) quantity: number,
+  ) {
+    return this.itemService.hasStock(itemId, quantity);
+  }
+
+  @Put('update')
+  async updateItemQuantity(@Body() body: { itemId: number; amount: number }) {
+    return this.itemService.updateItemQuantity(body.itemId, body.amount);
   }
 }

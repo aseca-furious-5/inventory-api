@@ -37,4 +37,23 @@ export class ItemService {
   getAdjustmentsByItemId(itemInventoryId: number) {
     return this.itemRepository.getAdjustmentsByItemId(itemInventoryId);
   }
+
+  async hasStock(itemId: number, quantity: number) {
+    const item = await this.itemRepository.findItemInventoryByItemId(itemId);
+    if (!item) {
+      throw new NotFoundException('Item');
+    }
+    return item.quantity > quantity;
+  }
+
+  async updateItemQuantity(itemId: number, quantity: number) {
+    const item = await this.itemRepository.findItemInventoryByItemId(itemId);
+    if (!item) {
+      throw new NotFoundException('Item');
+    }
+    return this.itemRepository.updateItemQuantity(
+      item.id,
+      item.quantity + quantity,
+    );
+  }
 }
