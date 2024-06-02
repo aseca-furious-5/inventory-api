@@ -50,4 +50,9 @@ export class ItemController {
   async updateItemQuantity(@Body() body: { itemId: number; amount: number }) {
     return this.itemService.updateItemQuantity(body.itemId, body.amount);
   }
+
+  @Put('update/all')
+  async updateAllItemQuantity(@Body() body: { amount: number }) {
+    return this.itemService.updateAllItemQuantity(body.amount);
+  }
 }

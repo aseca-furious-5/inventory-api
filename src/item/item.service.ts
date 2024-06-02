@@ -56,4 +56,14 @@ export class ItemService {
       item.quantity + quantity,
     );
   }
+
+  async updateAllItemQuantity(amount: number) {
+    const items = await this.itemRepository.getAllItems();
+    for (const item of items) {
+      await this.itemRepository.updateItemQuantity(
+        item.id,
+        item.quantity + amount,
+      );
+    }
+  }
 }
